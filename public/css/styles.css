@@ -354,3 +354,32 @@ main {
         text-align: center;
     }
 }
+
+
+
+
+.project-content {
+    width: 100%;
+}
+
+.project-date {
+    color: #2563eb;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.project h2 {
+    margin-bottom: 0.75rem;
+}
+
+.project p {
+    margin-bottom: 0.75rem;
+}
+
+.category-number {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2563eb;
+}
