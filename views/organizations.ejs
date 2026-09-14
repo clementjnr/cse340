@@ -13,59 +13,39 @@
 
 <section class="card-grid">
 
-    <article class="card">
-        <img
-            src="/images/organization.jfif"
-            alt="Volunteers working together"
-            width="800"
-            height="500"
-        >
+    <% if (organizations.length > 0) { %>
 
-        <h2>Community Helpers</h2>
+        <% organizations.forEach((organization) => { %>
 
-        <p>
-            A community-focused organization that connects volunteers
-            with people who need assistance.
-        </p>
+            <article class="card">
 
-        <p><strong>Focus:</strong> Community Support</p>
-    </article>
+                <img
+                    src="/images/organization.jfif"
+                    alt="Volunteers working together in a community organization"
+                    width="800"
+                    height="500"
+                >
 
-    <article class="card">
-        <img
-            src="/images/community.jfif"
-            alt="People supporting their local community"
-            width="800"
-            height="500"
-        >
+                <h2><%= organization.name %></h2>
 
-        <h2>Hope Foundation</h2>
+                <p>
+                    <%= organization.description %>
+                </p>
 
-        <p>
-            Supports families and individuals through educational,
-            social, and community programs.
-        </p>
+                <p>
+                    <strong>Location:</strong>
+                    <%= organization.location %>
+                </p>
 
-        <p><strong>Focus:</strong> Family and Education</p>
-    </article>
+            </article>
 
-    <article class="card">
-        <img
-            src="/images/service-project.jfif"
-            alt="Volunteers participating in service"
-            width="800"
-            height="500"
-        >
+        <% }) %>
 
-        <h2>Green Future Initiative</h2>
+    <% } else { %>
 
-        <p>
-            Encourages environmental responsibility through
-            cleanup projects and community education.
-        </p>
+        <p>No organizations are available at this time.</p>
 
-        <p><strong>Focus:</strong> Environment</p>
-    </article>
+    <% } %>
 
 </section>
 
