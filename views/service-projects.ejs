@@ -11,77 +11,58 @@
     </p>
 </section>
 
-<div class="project-list">
+<section class="project-list">
 
-    <article class="project">
-        <div>
-            <h2>Neighborhood Cleanup</h2>
+    <% if (projects.length > 0) { %>
 
-            <p>
-                Help clean public spaces and improve the appearance
-                of local neighborhoods.
-            </p>
+        <% projects.forEach((project) => { %>
 
-            <p>
-                <strong>Category:</strong> Environmental
-            </p>
+            <article class="project">
 
-            <p>
-                <strong>Volunteers Needed:</strong> 20
-            </p>
-        </div>
+                <div class="project-content">
 
-        <a class="button" href="/categories">
-            View Category
-        </a>
-    </article>
+                    <p class="project-date">
+                        <%= new Date(project.project_date).toLocaleDateString(
+                            "en-US",
+                            {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                timeZone: "UTC"
+                            }
+                        ) %>
+                    </p>
 
-    <article class="project">
-        <div>
-            <h2>School Supply Drive</h2>
+                    <h2>
+                        <%= project.title %>
+                    </h2>
 
-            <p>
-                Collect and organize school supplies for children
-                who need additional educational resources.
-            </p>
+                    <p>
+                        <strong>Organization:</strong>
+                        <%= project.organization_name %>
+                    </p>
 
-            <p>
-                <strong>Category:</strong> Educational
-            </p>
+                    <p>
+                        <%= project.description %>
+                    </p>
 
-            <p>
-                <strong>Volunteers Needed:</strong> 15
-            </p>
-        </div>
+                    <p>
+                        <strong>Location:</strong>
+                        <%= project.location %>
+                    </p>
 
-        <a class="button" href="/categories">
-            View Category
-        </a>
-    </article>
+                </div>
 
-    <article class="project">
-        <div>
-            <h2>Community Food Distribution</h2>
+            </article>
 
-            <p>
-                Assist with organizing and distributing food
-                to families in the local community.
-            </p>
+        <% }) %>
 
-            <p>
-                <strong>Category:</strong> Community Service
-            </p>
+    <% } else { %>
 
-            <p>
-                <strong>Volunteers Needed:</strong> 25
-            </p>
-        </div>
+        <p>No service projects are available at this time.</p>
 
-        <a class="button" href="/categories">
-            View Category
-        </a>
-    </article>
+    <% } %>
 
-</div>
+</section>
 
 <%- include("partials/footer") %>
