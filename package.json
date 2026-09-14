@@ -1,7 +1,7 @@
 {
   "name": "cse340",
   "version": "1.0.0",
-  "description": "CSE 340 W01 Initial Site Creation",
+  "description": "CSE 340 W02 Database Retrieval",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -12,6 +12,6 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
-    "pg": "^8.23.0"
+    "pg": "^8.13.1"
   }
 }
