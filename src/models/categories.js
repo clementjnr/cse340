@@ -14,41 +14,25 @@ const getAllCategories = async () => {
   return result.rows;
 };
 
-export {
-  getAllCategories
-};
-
-
-
-
-
-const getAllCategories = async () => {
-  const sql = `
-    SELECT category_id, name
-    FROM categories
-    ORDER BY name;
-  `;
-
-  const result = await pool.query(sql);
-  return result.rows;
-};
-
-
 const getCategoryById = async (categoryId) => {
   const sql = `
-    SELECT category_id, name
+    SELECT
+      category_id,
+      name
     FROM categories
     WHERE category_id = $1;
   `;
 
   const result = await pool.query(sql, [categoryId]);
+
   return result.rows[0];
 };
 
-
 const getCategoriesByProjectId = async (projectId) => {
   const sql = `
-    SELECT c.category_id, c.name
+    SELECT
+      c.category_id,
+      c.name
     FROM categories AS c
     INNER JOIN project_categories AS pc
       ON c.category_id = pc.category_id
@@ -57,12 +41,30 @@ const getCategoriesByProjectId = async (projectId) => {
   `;
 
   const result = await pool.query(sql, [projectId]);
+
   return result.rows;
 };
 
+const getProjectsByCategoryId = async (categoryId) => {
+  const sql = `
+    SELECT
+      sp.project_id,
+      sp.title
+    FROM service_projects AS sp
+    INNER JOIN project_categories AS pc
+      ON sp.project_id = pc.project_id
+    WHERE pc.category_id = $1
+    ORDER BY sp.project_date, sp.title;
+  `;
+
+  const result = await pool.query(sql, [categoryId]);
+
+  return result.rows;
+};
 
 export {
   getAllCategories,
   getCategoryById,
-  getCategoriesByProjectId
+  getCategoriesByProjectId,
+  getProjectsByCategoryId
 };
