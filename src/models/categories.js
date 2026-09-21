@@ -20,7 +20,7 @@ export {
 
 
 
-import pool from "../database/pool.js";
+
 
 const getAllCategories = async () => {
   const sql = `
