@@ -23,7 +23,11 @@
                     <%= String(index + 1).padStart(2, "0") %>
                 </span>
 
-                <h2><%= category.name %></h2>
+                <h2>
+                <a href="/category/<%= category.category_id %>">
+  <%= category.name %>
+</a>
+                </h2>
 
                 <p>
                     Explore service projects associated with
