@@ -45,26 +45,8 @@ const getCategoriesByProjectId = async (projectId) => {
   return result.rows;
 };
 
-const getProjectsByCategoryId = async (categoryId) => {
-  const sql = `
-    SELECT
-      sp.project_id,
-      sp.title
-    FROM service_projects AS sp
-    INNER JOIN project_categories AS pc
-      ON sp.project_id = pc.project_id
-    WHERE pc.category_id = $1
-    ORDER BY sp.project_date, sp.title;
-  `;
-
-  const result = await pool.query(sql, [categoryId]);
-
-  return result.rows;
-};
-
 export {
   getAllCategories,
   getCategoryById,
-  getCategoriesByProjectId,
-  getProjectsByCategoryId
+  getCategoriesByProjectId
 };

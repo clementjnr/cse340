@@ -1,7 +1,10 @@
-<%- include("partials/header") %>
+<%- include("partials/header", { title }) %>
 
 <main>
   <section class="category-detail">
+
+    <p class="eyebrow">Service Category</p>
+
     <h1><%= category.name %></h1>
 
     <h2>Service Projects</h2>
@@ -28,9 +31,12 @@
 
     <% } else { %>
 
-      <p>No service projects are currently available for this category.</p>
+      <p>
+        No service projects are currently available for this category.
+      </p>
 
     <% } %>
+
   </section>
 </main>
 

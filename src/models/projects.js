@@ -20,7 +20,6 @@ const getAllProjects = async () => {
   return result.rows;
 };
 
-
 const getProjectById = async (projectId) => {
   const sql = `
     SELECT
@@ -41,7 +40,6 @@ const getProjectById = async (projectId) => {
 
   return result.rows[0];
 };
-
 
 const getProjectsByCategoryId = async (categoryId) => {
   const sql = `
@@ -65,7 +63,6 @@ const getProjectsByCategoryId = async (categoryId) => {
 
   return result.rows;
 };
-
 
 export {
   getAllProjects,

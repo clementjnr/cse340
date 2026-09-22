@@ -3,8 +3,9 @@ import {
   getCategoryById
 } from "../models/categories.js";
 
-import { getProjectsByCategoryId } from "../models/projects.js";
-
+import {
+  getProjectsByCategoryId
+} from "../models/projects.js";
 
 const buildCategories = async (req, res, next) => {
   try {
@@ -19,7 +20,6 @@ const buildCategories = async (req, res, next) => {
   }
 };
 
-
 const buildCategoryDetail = async (req, res, next) => {
   try {
     const categoryId = Number(req.params.id);
@@ -27,7 +27,7 @@ const buildCategoryDetail = async (req, res, next) => {
     const category = await getCategoryById(categoryId);
 
     if (!category) {
-      return res.status(404).render("home", {
+      return res.status(404).render("error", {
         title: "Category Not Found",
         message: "The category you requested could not be found."
       });
@@ -44,7 +44,6 @@ const buildCategoryDetail = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export {
   buildCategories,

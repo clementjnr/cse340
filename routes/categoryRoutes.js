@@ -1,9 +1,11 @@
+
+
 import express from "express";
 
 import {
   buildCategories,
   buildCategoryDetail
-} from "../src/controllers/categoriesController.js";
+} from "../controllers/categoryController.js";
 
 const router = express.Router();
 

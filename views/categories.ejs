@@ -1,49 +1,51 @@
 <%- include("partials/header", { title }) %>
 
-<section class="page-heading">
+<main>
+  <section class="page-heading">
     <p class="eyebrow">Find Your Cause</p>
 
     <h1>Service Categories</h1>
 
     <p>
-        Explore different areas where you can serve and make
-        a positive difference.
+      Explore different areas where you can serve and make
+      a positive difference.
     </p>
-</section>
+  </section>
 
-<section class="category-grid">
+  <section class="category-grid">
 
     <% if (categories.length > 0) { %>
 
-        <% categories.forEach((category, index) => { %>
+      <% categories.forEach((category, index) => { %>
 
-            <article class="category-card">
+        <article class="category-card">
 
-                <span class="category-number">
-                    <%= String(index + 1).padStart(2, "0") %>
-                </span>
+          <span class="category-number">
+            <%= String(index + 1).padStart(2, "0") %>
+          </span>
 
-                <h2>
-                <a href="/category/<%= category.category_id %>">
-  <%= category.name %>
-</a>
-                </h2>
+          <h2>
+            <a href="/category/<%= category.category_id %>">
+              <%= category.name %>
+            </a>
+          </h2>
 
-                <p>
-                    Explore service projects associated with
-                    the <%= category.name %> category.
-                </p>
+          <p>
+            Explore service projects associated with
+            the <%= category.name %> category.
+          </p>
 
-            </article>
+        </article>
 
-        <% }) %>
+      <% }) %>
 
     <% } else { %>
 
-        <p>No categories are available at this time.</p>
+      <p>No categories are available at this time.</p>
 
     <% } %>
 
-</section>
+  </section>
+</main>
 
 <%- include("partials/footer") %>
