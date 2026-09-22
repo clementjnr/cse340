@@ -28,11 +28,13 @@ app.use("/organizations", organizationRoutes);
 
 app.use("/projects", projectRoutes);
 
+app.use("/project", projectRoutes);
+
+app.use("/service-projects", projectRoutes);
+
 app.use("/categories", categoryRoutes);
 
 app.use("/category", categoryRoutes);
-
-app.use("/project", projectRoutes);
 
 app.use((req, res) => {
   res.status(404).render("home", {
