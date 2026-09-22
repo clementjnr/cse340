@@ -28,6 +28,8 @@ app.use("/organizations", organizationRoutes);
 
 app.use("/projects", projectRoutes);
 
+app.use("/categories", categoryRoutes);
+
 app.use("/category", categoryRoutes);
 
 app.use("/project", projectRoutes);
