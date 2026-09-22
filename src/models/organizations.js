@@ -16,6 +16,25 @@ const getAllOrganizations = async () => {
   return result.rows;
 };
 
+
+const getOrganizationById = async (organizationId) => {
+  const sql = `
+    SELECT
+      organization_id,
+      name,
+      description,
+      location
+    FROM organizations
+    WHERE organization_id = $1;
+  `;
+
+  const result = await pool.query(sql, [organizationId]);
+
+  return result.rows[0];
+};
+
+
 export {
-  getAllOrganizations
+  getAllOrganizations,
+  getOrganizationById
 };

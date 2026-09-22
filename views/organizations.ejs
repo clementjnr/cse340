@@ -1,52 +1,27 @@
-<%- include("partials/header", { title }) %>
+<%- include("partials/header") %>
 
-<section class="page-heading">
-    <p class="eyebrow">Get Involved</p>
+<main>
+  <h1>Organizations</h1>
 
-    <h1>Community Organizations</h1>
+  <% if (organizations && organizations.length > 0) { %>
 
-    <p>
-        Explore organizations that provide valuable services
-        and support to people in our communities.
-    </p>
-</section>
+    <ul>
+      <% organizations.forEach(organization => { %>
 
-<section class="card-grid">
+        <li>
+          <a href="/organizations/<%= organization.organization_id %>">
+            <%= organization.name %>
+          </a>
+        </li>
 
-    <% if (organizations.length > 0) { %>
+      <% }) %>
+    </ul>
 
-        <% organizations.forEach((organization) => { %>
+  <% } else { %>
 
-            <article class="card">
+    <p>No organizations are currently available.</p>
 
-                <img
-                    src="/images/organization.jfif"
-                    alt="Volunteers working together in a community organization"
-                    width="800"
-                    height="500"
-                >
-
-                <h2><%= organization.name %></h2>
-
-                <p>
-                    <%= organization.description %>
-                </p>
-
-                <p>
-                    <strong>Location:</strong>
-                    <%= organization.location %>
-                </p>
-
-            </article>
-
-        <% }) %>
-
-    <% } else { %>
-
-        <p>No organizations are available at this time.</p>
-
-    <% } %>
-
-</section>
+  <% } %>
+</main>
 
 <%- include("partials/footer") %>

@@ -12,7 +12,7 @@ const buildProjects = async (req, res, next) => {
   try {
     const projects = await getAllProjects();
 
-    res.render("projects", {
+    res.render("service-projects", {
       title: "Service Projects",
       projects
     });
@@ -29,9 +29,9 @@ const buildProjectDetail = async (req, res, next) => {
     const project = await getProjectById(projectId);
 
     if (!project) {
-      return res.status(404).render("error", {
+      return res.status(404).render("home", {
         title: "Project Not Found",
-        message: "The project you requested could not be found."
+        message: "The service project you requested could not be found."
       });
     }
 

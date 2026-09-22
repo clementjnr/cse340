@@ -3,6 +3,11 @@ import {
   getOrganizationById
 } from "../models/organizations.js";
 
+import {
+  getProjectsByOrganizationId
+} from "../models/projects.js";
+
+
 const buildOrganizations = async (req, res, next) => {
   try {
     const organizations = await getAllOrganizations();
@@ -30,9 +35,12 @@ const buildOrganizationDetail = async (req, res, next) => {
       });
     }
 
+    const projects = await getProjectsByOrganizationId(organizationId);
+
     res.render("organization-detail", {
       title: organization.name,
-      organization
+      organization,
+      projects
     });
   } catch (error) {
     next(error);

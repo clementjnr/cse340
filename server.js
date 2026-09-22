@@ -3,9 +3,10 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { getAllOrganizations } from "./src/models/organizations.js";
-import { getAllProjects } from "./src/models/projects.js";
-import { getAllCategories } from "./src/models/categories.js";
+import indexRoutes from "./routes/index.js";
+import organizationRoutes from "./routes/organizationRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 dotenv.config();
 
@@ -19,94 +20,31 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.render("home", {
-    title: "Home"
-  });
-});
+app.use("/", indexRoutes);
 
-app.get("/organizations", async (req, res) => {
-  try {
-    const organizations = await getAllOrganizations();
+app.use("/organizations", organizationRoutes);
 
-    res.render("organizations", {
-      title: "Organizations",
-      organizations
-    });
-  } catch (error) {
-    console.error("Error retrieving organizations:", error);
+app.use("/projects", projectRoutes);
 
-    res.status(500).render("home", {
-      title: "Database Error",
-      message: "Unable to retrieve organizations."
-    });
-  }
-});
+app.use("/category", categoryRoutes);
 
-app.get("/service-projects", async (req, res) => {
-  try {
-    const projects = await getAllProjects();
-
-    res.render("service-projects", {
-      title: "Service Projects",
-      projects
-    });
-  } catch (error) {
-    console.error("Error retrieving service projects:", error);
-
-    res.status(500).render("home", {
-      title: "Database Error",
-      message: "Unable to retrieve service projects."
-    });
-  }
-});
-
-/*
- * This /projects route is included as an alias because the
- * W02 team activity refers to views/projects.ejs.
- * Your actual page remains service-projects.ejs.
- */
-app.get("/projects", async (req, res) => {
-  try {
-    const projects = await getAllProjects();
-
-    res.render("service-projects", {
-      title: "Service Projects",
-      projects
-    });
-  } catch (error) {
-    console.error("Error retrieving projects:", error);
-
-    res.status(500).render("home", {
-      title: "Database Error",
-      message: "Unable to retrieve projects."
-    });
-  }
-});
-
-app.get("/categories", async (req, res) => {
-  try {
-    const categories = await getAllCategories();
-
-    res.render("categories", {
-      title: "Categories",
-      categories
-    });
-  } catch (error) {
-    console.error("Error retrieving categories:", error);
-
-    res.status(500).render("home", {
-      title: "Database Error",
-      message: "Unable to retrieve categories."
-    });
-  }
-});
+app.use("/project", projectRoutes);
 
 app.use((req, res) => {
   res.status(404).render("home", {
     title: "Page Not Found",
     message: "The page you requested could not be found."
+  });
+});
+
+app.use((error, req, res, next) => {
+  console.error(error);
+
+  res.status(500).render("home", {
+    title: "Server Error",
+    message: "Sorry, something went wrong on the server."
   });
 });
 

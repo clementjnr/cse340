@@ -1,5 +1,6 @@
 import pool from "../database/pool.js";
 
+
 const getAllCategories = async () => {
   const sql = `
     SELECT
@@ -14,6 +15,7 @@ const getAllCategories = async () => {
   return result.rows;
 };
 
+
 const getCategoryById = async (categoryId) => {
   const sql = `
     SELECT
@@ -27,6 +29,7 @@ const getCategoryById = async (categoryId) => {
 
   return result.rows[0];
 };
+
 
 const getCategoriesByProjectId = async (projectId) => {
   const sql = `
@@ -44,6 +47,7 @@ const getCategoriesByProjectId = async (projectId) => {
 
   return result.rows;
 };
+
 
 export {
   getAllCategories,
