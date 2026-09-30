@@ -9,9 +9,11 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-session": "^1.19.0",
     "pg": "^8.13.1"
   }
 }

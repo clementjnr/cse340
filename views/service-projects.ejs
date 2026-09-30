@@ -3,6 +3,10 @@
 <main>
   <h1>Upcoming Service Projects</h1>
 
+  <a href="/new-project">
+  Create New Service Project
+</a>
+
   <% if (projects && projects.length > 0) { %>
 
     <ul>
@@ -13,6 +17,12 @@
             <a href="/projects/<%= project.project_id %>">
               <%= project.title %>
             </a>
+
+     
+
+<a href="/edit-project/<%= project.project_id %>">
+  Edit
+</a>
           </h2>
 
           <p>

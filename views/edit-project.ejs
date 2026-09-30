@@ -1,0 +1,83 @@
+<%- include("partials/header") %>
+
+<main>
+  <h1>New Service Project</h1>
+
+  <form action="/new-project" method="POST">
+
+    <label for="organization_id">
+      Organization
+    </label>
+
+    <select
+      id="organization_id"
+      name="organization_id"
+      required
+    >
+      <option value="">
+        Select an organization
+      </option>
+
+      <% organizations.forEach(organization => { %>
+        <option
+          value="<%= organization.organization_id %>"
+        >
+          <%= organization.name %>
+        </option>
+      <% }) %>
+    </select>
+
+    <label for="title">
+      Project Title
+    </label>
+
+    <input
+      type="text"
+      id="title"
+      name="title"
+      required
+      maxlength="100"
+    >
+
+    <label for="description">
+      Description
+    </label>
+
+    <textarea
+      id="description"
+      name="description"
+    ></textarea>
+
+    <label for="location">
+      Location
+    </label>
+
+    <input
+      type="text"
+      id="location"
+      name="location"
+    >
+
+    <label for="project_date">
+      Project Date
+    </label>
+
+    <input
+      type="date"
+      id="project_date"
+      name="project_date"
+      required
+    >
+
+    <button type="submit">
+      Create Service Project
+    </button>
+
+    <a href="/projects">
+      Cancel
+    </a>
+
+  </form>
+</main>
+
+<%- include("partials/footer") %>

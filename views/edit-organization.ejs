@@ -1,0 +1,55 @@
+<%- include("partials/header") %>
+
+<main>
+  <h1>Edit Organization</h1>
+
+  <form
+    action="/edit-organization/<%= organization.organization_id %>"
+    method="POST"
+  >
+
+    <label for="name">
+      Organization Name
+    </label>
+
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value="<%= organization.name %>"
+      required
+      maxlength="100"
+    >
+
+    <label for="description">
+      Description
+    </label>
+
+    <textarea
+      id="description"
+      name="description"
+    ><%= organization.description || "" %></textarea>
+
+    <label for="location">
+      Location
+    </label>
+
+    <input
+      type="text"
+      id="location"
+      name="location"
+      value="<%= organization.location || "" %>"
+    >
+
+    <button type="submit">
+      Update Organization
+    </button>
+
+    <a href="/organization/<%= organization.organization_id %>">
+      Cancel
+    </a>
+
+  </form>
+</main>
+
+<%- include("partials/footer") %>

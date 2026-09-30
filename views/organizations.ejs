@@ -1,6 +1,10 @@
 <%- include("partials/header") %>
 
 <main>
+
+  <a href="/new-organization">
+  Create New Organization
+</a>
   <h1>Organizations</h1>
 
   <% if (organizations && organizations.length > 0) { %>
@@ -8,10 +12,16 @@
     <ul>
       <% organizations.forEach(organization => { %>
 
+
+
         <li>
           <a href="/organizations/<%= organization.organization_id %>">
             <%= organization.name %>
           </a>
+
+                  <a href="/edit-organization/<%= organization.organization_id %>">
+  Edit
+</a>
         </li>
 
       <% }) %>

@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+
+<main>
+  <h1>New Organization</h1>
+
+  <form action="/new-organization" method="POST">
+
+    <label for="name">Organization Name</label>
+
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      maxlength="100"
+    >
+
+    <label for="description">Description</label>
+
+    <textarea
+      id="description"
+      name="description"
+    ></textarea>
+
+    <label for="location">Location</label>
+
+    <input
+      type="text"
+      id="location"
+      name="location"
+    >
+
+    <button type="submit">
+      Create Organization
+    </button>
+
+    <a href="/organizations">
+      Cancel
+    </a>
+
+  </form>
+</main>
+
+<%- include("partials/footer") %>
