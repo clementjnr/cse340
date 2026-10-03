@@ -1,29 +1,58 @@
 <%- include("partials/header") %>
 
 <main>
+
   <h1><%= organization.name %></h1>
 
+
+  <img
+  class="organization-image"
+  src="/images/<%= organization.image_filename %>"
+  alt="<%= organization.name %>"
+>
+
+  <p>
+    <a href="/edit-organization/<%= organization.organization_id %>">
+      Edit Organization
+    </a>
+  </p>
+
   <section>
+
     <h2>Organization Details</h2>
 
     <p>
       <strong>Description:</strong>
-      <%= organization.description %>
+      <%= organization.description || "No description provided." %>
     </p>
 
     <p>
       <strong>Location:</strong>
-      <%= organization.location %>
+      <%= organization.location || "No location provided." %>
     </p>
+
+    <p>
+      <strong>Contact Email:</strong>
+      <a href="mailto:<%= organization.contact_email %>">
+        <%= organization.contact_email %>
+      </a>
+    </p>
+
+    <p>
+      <strong>Image Filename:</strong>
+      <%= organization.image_filename || "default-organization.jfif" %>
+    </p>
+
   </section>
 
-
   <section>
+
     <h2>Service Projects</h2>
 
     <% if (projects && projects.length > 0) { %>
 
       <ul>
+
         <% projects.forEach(project => { %>
 
           <li>
@@ -33,14 +62,19 @@
           </li>
 
         <% }) %>
+
       </ul>
 
     <% } else { %>
 
-      <p>This organization has no service projects listed.</p>
+      <p>
+        This organization has no service projects listed.
+      </p>
 
     <% } %>
+
   </section>
+
 </main>
 
 <%- include("partials/footer") %>

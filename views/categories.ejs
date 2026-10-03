@@ -1,29 +1,29 @@
 <%- include("partials/header") %>
 
 <main>
-  <h1>Categories</h1>
+
   <a href="/new-category">
-  Create New Category
-</a>
+    Create New Category
+  </a>
+
+  <h1>Categories</h1>
 
   <% if (categories && categories.length > 0) { %>
 
     <ul>
+
       <% categories.forEach(category => { %>
 
-
-
         <li>
+
           <a href="/categories/<%= category.category_id %>">
             <%= category.name %>
           </a>
 
-          <a href="/edit-category/<%= category.category_id %>">
-  Edit
-</a>
         </li>
 
       <% }) %>
+
     </ul>
 
   <% } else { %>
@@ -31,6 +31,7 @@
     <p>No categories are currently available.</p>
 
   <% } %>
+
 </main>
 
 <%- include("partials/footer") %>

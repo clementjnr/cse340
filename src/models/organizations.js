@@ -6,7 +6,9 @@ const getAllOrganizations = async () => {
       organization_id,
       name,
       description,
-      location
+      location,
+      contact_email,
+      image_filename
     FROM organizations
     ORDER BY name;
   `;
@@ -22,7 +24,9 @@ const getOrganizationById = async (organizationId) => {
       organization_id,
       name,
       description,
-      location
+      location,
+      contact_email,
+      image_filename
     FROM organizations
     WHERE organization_id = $1;
   `;
@@ -32,19 +36,33 @@ const getOrganizationById = async (organizationId) => {
   return result.rows[0];
 };
 
-const createOrganization = async (name, description, location) => {
+const createOrganization = async (
+  name,
+  description,
+  location,
+  contactEmail,
+  imageFilename
+) => {
   const sql = `
     INSERT INTO organizations
-      (name, description, location)
+      (
+        name,
+        description,
+        location,
+        contact_email,
+        image_filename
+      )
     VALUES
-      ($1, $2, $3)
+      ($1, $2, $3, $4, $5)
     RETURNING *;
   `;
 
   const result = await pool.query(sql, [
     name,
     description,
-    location
+    location,
+    contactEmail,
+    imageFilename
   ]);
 
   return result.rows[0];
@@ -54,15 +72,19 @@ const updateOrganization = async (
   organizationId,
   name,
   description,
-  location
+  location,
+  contactEmail,
+  imageFilename
 ) => {
   const sql = `
     UPDATE organizations
     SET
       name = $1,
       description = $2,
-      location = $3
-    WHERE organization_id = $4
+      location = $3,
+      contact_email = $4,
+      image_filename = $5
+    WHERE organization_id = $6
     RETURNING *;
   `;
 
@@ -70,6 +92,8 @@ const updateOrganization = async (
     name,
     description,
     location,
+    contactEmail,
+    imageFilename,
     organizationId
   ]);
 

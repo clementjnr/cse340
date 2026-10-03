@@ -58,23 +58,15 @@ const buildNewCategory = async (req, res) => {
 
 const createNewCategory = async (req, res, next) => {
   try {
-    const name = req.body.name?.trim();
+    const errors = req.validationErrors || [];
 
-    // Server-side validation
-    if (!name) {
-      req.flash("error", "Category name is required.");
-
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
       return res.redirect("/new-category");
     }
 
-    if (name.length < 3 || name.length > 100) {
-      req.flash(
-        "error",
-        "Category name must be between 3 and 100 characters."
-      );
-
-      return res.redirect("/new-category");
-    }
+    const name =
+      req.body.name?.trim();
 
     await createCategory(name);
 
@@ -116,38 +108,33 @@ const updateExistingCategory = async (
   next
 ) => {
   try {
-    const categoryId = Number(req.params.id);
+    const categoryId =
+      Number(req.params.id);
 
-    const name = req.body.name?.trim();
+    const errors = req.validationErrors || [];
 
-    // Server-side validation
-    if (!name) {
-      req.flash("error", "Category name is required.");
-
-      return res.redirect(
-        `/edit-category/${categoryId}`
-      );
-    }
-
-    if (name.length < 3 || name.length > 100) {
-      req.flash(
-        "error",
-        "Category name must be between 3 and 100 characters."
-      );
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
 
       return res.redirect(
         `/edit-category/${categoryId}`
       );
     }
 
-    await updateCategory(categoryId, name);
+    const name =
+      req.body.name?.trim();
+
+    await updateCategory(
+      categoryId,
+      name
+    );
 
     req.flash(
       "success",
       "Category was successfully updated."
     );
 
-    res.redirect("/categories");
+    res.redirect(`/categories/${categoryId}`);
   } catch (error) {
     next(error);
   }

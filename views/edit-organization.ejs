@@ -21,6 +21,18 @@
       maxlength="100"
     >
 
+    <label for="contact_email">
+      Contact Email
+    </label>
+
+    <input
+      type="email"
+      id="contact_email"
+      name="contact_email"
+      value="<%= organization.contact_email || "" %>"
+      required
+    >
+
     <label for="description">
       Description
     </label>
@@ -41,11 +53,33 @@
       value="<%= organization.location || "" %>"
     >
 
+    <label for="image_filename">
+      Organization Image Filename
+    </label>
+
+    <input
+      type="text"
+      id="image_filename"
+      name="image_filename"
+      value="<%= organization.image_filename || "default-organization.jfif" %>"
+      required
+    >
+
+    <p>
+      Current image:
+    </p>
+
+    <img
+      src="/images/<%= organization.image_filename || "default-organization.jfif" %>"
+      alt="<%= organization.name %>"
+      width="200"
+    >
+
     <button type="submit">
       Update Organization
     </button>
 
-    <a href="/organization/<%= organization.organization_id %>">
+    <a href="/organizations/<%= organization.organization_id %>">
       Cancel
     </a>
 

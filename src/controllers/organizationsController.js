@@ -58,25 +58,25 @@ const createNewOrganization = async (req, res, next) => {
     const name = req.body.name?.trim();
     const description = req.body.description?.trim();
     const location = req.body.location?.trim();
+    const contactEmail = req.body.contact_email?.trim();
 
-    if (!name) {
-      req.flash("error", "Organization name is required.");
-      return res.redirect("/new-organization");
-    }
+    const imageFilename =
+      req.body.image_filename?.trim() ||
+      "default-organization.jfif";
 
-    if (name.length < 3 || name.length > 100) {
-      req.flash(
-        "error",
-        "Organization name must be between 3 and 100 characters."
-      );
+    const errors = req.validationErrors || [];
 
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
       return res.redirect("/new-organization");
     }
 
     await createOrganization(
       name,
       description,
-      location
+      location,
+      contactEmail,
+      imageFilename
     );
 
     req.flash(
@@ -122,19 +122,16 @@ const updateExistingOrganization = async (
     const name = req.body.name?.trim();
     const description = req.body.description?.trim();
     const location = req.body.location?.trim();
+    const contactEmail = req.body.contact_email?.trim();
 
-    if (!name) {
-      req.flash("error", "Organization name is required.");
-      return res.redirect(
-        `/edit-organization/${organizationId}`
-      );
-    }
+    const imageFilename =
+      req.body.image_filename?.trim() ||
+      "default-organization.jfif";
 
-    if (name.length < 3 || name.length > 100) {
-      req.flash(
-        "error",
-        "Organization name must be between 3 and 100 characters."
-      );
+    const errors = req.validationErrors || [];
+
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
 
       return res.redirect(
         `/edit-organization/${organizationId}`
@@ -145,7 +142,9 @@ const updateExistingOrganization = async (
       organizationId,
       name,
       description,
-      location
+      location,
+      contactEmail,
+      imageFilename
     );
 
     req.flash(
@@ -153,7 +152,7 @@ const updateExistingOrganization = async (
       "Organization was successfully updated."
     );
 
-    res.redirect(`/organization/${organizationId}`);
+    res.redirect(`/organizations/${organizationId}`);
   } catch (error) {
     next(error);
   }

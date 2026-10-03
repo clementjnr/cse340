@@ -3,28 +3,40 @@
 <main>
 
   <a href="/new-organization">
-  Create New Organization
-</a>
+    Create New Organization
+  </a>
+
   <h1>Organizations</h1>
 
   <% if (organizations && organizations.length > 0) { %>
 
     <ul>
+
       <% organizations.forEach(organization => { %>
 
-
-
         <li>
-          <a href="/organizations/<%= organization.organization_id %>">
-            <%= organization.name %>
-          </a>
 
-                  <a href="/edit-organization/<%= organization.organization_id %>">
-  Edit
-</a>
+          <img
+            src="/images/<%= organization.image_filename || "default-organization.jfif" %>"
+            alt="<%= organization.name %>"
+            width="150"
+          >
+
+          <h2>
+            <a href="/organizations/<%= organization.organization_id %>">
+              <%= organization.name %>
+            </a>
+          </h2>
+
+          <p>
+            <strong>Contact:</strong>
+            <%= organization.contact_email %>
+          </p>
+
         </li>
 
       <% }) %>
+
     </ul>
 
   <% } else { %>
@@ -32,6 +44,7 @@
     <p>No organizations are currently available.</p>
 
   <% } %>
+
 </main>
 
 <%- include("partials/footer") %>

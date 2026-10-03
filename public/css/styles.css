@@ -438,3 +438,32 @@ form button {
 form a {
   margin-left: 1rem;
 }
+
+.category-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.category-option input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.category-option label {
+  margin: 0;
+  display: inline-block;
+  text-align: left;
+}
+
+.organization-image {
+  width: 250px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 1rem 0;
+  border-radius: 8px;
+}

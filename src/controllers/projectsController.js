@@ -83,58 +83,29 @@ const buildNewProject = async (
   }
 };
 
-const createNewProject = async (
-  req,
-  res,
-  next
-) => {
+const createNewProject = async (req, res, next) => {
   try {
+    const errors = req.validationErrors || [];
+
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
+      return res.redirect("/new-project");
+    }
+
     const organizationId =
       Number(req.body.organization_id);
 
-    const title = req.body.title?.trim();
+    const title =
+      req.body.title?.trim();
+
     const description =
       req.body.description?.trim();
+
     const location =
       req.body.location?.trim();
+
     const projectDate =
       req.body.project_date;
-
-    if (!organizationId) {
-      req.flash(
-        "error",
-        "Please select an organization."
-      );
-
-      return res.redirect("/new-project");
-    }
-
-    if (!title) {
-      req.flash(
-        "error",
-        "Project title is required."
-      );
-
-      return res.redirect("/new-project");
-    }
-
-    if (title.length < 3 || title.length > 100) {
-      req.flash(
-        "error",
-        "Project title must be between 3 and 100 characters."
-      );
-
-      return res.redirect("/new-project");
-    }
-
-    if (!projectDate) {
-      req.flash(
-        "error",
-        "Project date is required."
-      );
-
-      return res.redirect("/new-project");
-    }
 
     await createProject(
       organizationId,
@@ -198,60 +169,30 @@ const updateExistingProject = async (
     const projectId =
       Number(req.params.id);
 
+    const errors = req.validationErrors || [];
+
+    if (errors.length > 0) {
+      req.flash("error", errors[0].msg);
+
+      return res.redirect(
+        `/edit-project/${projectId}`
+      );
+    }
+
     const organizationId =
       Number(req.body.organization_id);
 
-    const title = req.body.title?.trim();
+    const title =
+      req.body.title?.trim();
+
     const description =
       req.body.description?.trim();
+
     const location =
       req.body.location?.trim();
+
     const projectDate =
       req.body.project_date;
-
-    if (!organizationId) {
-      req.flash(
-        "error",
-        "Please select an organization."
-      );
-
-      return res.redirect(
-        `/edit-project/${projectId}`
-      );
-    }
-
-    if (!title) {
-      req.flash(
-        "error",
-        "Project title is required."
-      );
-
-      return res.redirect(
-        `/edit-project/${projectId}`
-      );
-    }
-
-    if (title.length < 3 || title.length > 100) {
-      req.flash(
-        "error",
-        "Project title must be between 3 and 100 characters."
-      );
-
-      return res.redirect(
-        `/edit-project/${projectId}`
-      );
-    }
-
-    if (!projectDate) {
-      req.flash(
-        "error",
-        "Project date is required."
-      );
-
-      return res.redirect(
-        `/edit-project/${projectId}`
-      );
-    }
 
     await updateProject(
       projectId,
@@ -267,7 +208,7 @@ const updateExistingProject = async (
       "Service project was successfully updated."
     );
 
-    res.redirect(`/project/${projectId}`);
+    res.redirect(`/projects/${projectId}`);
   } catch (error) {
     next(error);
   }

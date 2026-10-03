@@ -1,19 +1,27 @@
 <%- include("partials/header") %>
 
 <main>
+
   <h1><%= project.title %></h1>
 
+  <p>
+    <a href="/edit-project/<%= project.project_id %>">
+      Edit Project
+    </a>
+  </p>
+
   <section>
+
     <h2>Project Details</h2>
 
     <p>
       <strong>Description:</strong>
-      <%= project.description %>
+      <%= project.description || "No description provided." %>
     </p>
 
     <p>
       <strong>Location:</strong>
-      <%= project.location %>
+      <%= project.location || "No location provided." %>
     </p>
 
     <p>
@@ -27,15 +35,18 @@
         <%= project.organization_name %>
       </a>
     </p>
+
   </section>
 
-
   <section>
+
     <h2>Categories</h2>
 
-    <a href="/assign-categories/<%= project.project_id %>">
-  Assign Categories
-</a>
+    <p>
+      <a href="/assign-categories/<%= project.project_id %>">
+        Assign Categories to This Project
+      </a>
+    </p>
 
     <% if (categories && categories.length > 0) { %>
 
@@ -56,10 +67,14 @@
 
     <% } else { %>
 
-      <p>No categories are assigned to this project.</p>
+      <p>
+        No categories are assigned to this project.
+      </p>
 
     <% } %>
+
   </section>
+
 </main>
 
 <%- include("partials/footer") %>

@@ -23,9 +23,17 @@ import {
   updateExistingCategory
 } from "../src/controllers/categoriesController.js";
 
+import {
+  organizationValidation,
+  projectValidation,
+  categoryValidation,
+  checkValidation
+} from "../src/validators/adminValidators.js";
+
 const router = express.Router();
 
 // Organizations
+
 router.get(
   "/new-organization",
   buildNewOrganization
@@ -33,6 +41,8 @@ router.get(
 
 router.post(
   "/new-organization",
+  organizationValidation,
+  checkValidation,
   createNewOrganization
 );
 
@@ -43,10 +53,13 @@ router.get(
 
 router.post(
   "/edit-organization/:id",
+  organizationValidation,
+  checkValidation,
   updateExistingOrganization
 );
 
 // Projects
+
 router.get(
   "/new-project",
   buildNewProject
@@ -54,6 +67,8 @@ router.get(
 
 router.post(
   "/new-project",
+  projectValidation,
+  checkValidation,
   createNewProject
 );
 
@@ -64,10 +79,13 @@ router.get(
 
 router.post(
   "/edit-project/:id",
+  projectValidation,
+  checkValidation,
   updateExistingProject
 );
 
 // Project category assignment
+
 router.get(
   "/assign-categories/:id",
   buildAssignCategories
@@ -79,6 +97,7 @@ router.post(
 );
 
 // Categories
+
 router.get(
   "/new-category",
   buildNewCategory
@@ -86,6 +105,8 @@ router.get(
 
 router.post(
   "/new-category",
+  categoryValidation,
+  checkValidation,
   createNewCategory
 );
 
@@ -96,6 +117,8 @@ router.get(
 
 router.post(
   "/edit-category/:id",
+  categoryValidation,
+  checkValidation,
   updateExistingCategory
 );
 

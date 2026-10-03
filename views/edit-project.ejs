@@ -1,9 +1,13 @@
 <%- include("partials/header") %>
 
 <main>
-  <h1>New Service Project</h1>
 
-  <form action="/new-project" method="POST">
+  <h1>Edit Service Project</h1>
+
+  <form
+    action="/edit-project/<%= project.project_id %>"
+    method="POST"
+  >
 
     <label for="organization_id">
       Organization
@@ -14,17 +18,24 @@
       name="organization_id"
       required
     >
+
       <option value="">
         Select an organization
       </option>
 
       <% organizations.forEach(organization => { %>
+
         <option
           value="<%= organization.organization_id %>"
+          <%= Number(organization.organization_id) === Number(project.organization_id)
+            ? "selected"
+            : "" %>
         >
           <%= organization.name %>
         </option>
+
       <% }) %>
+
     </select>
 
     <label for="title">
@@ -35,6 +46,7 @@
       type="text"
       id="title"
       name="title"
+      value="<%= project.title || "" %>"
       required
       maxlength="100"
     >
@@ -46,7 +58,7 @@
     <textarea
       id="description"
       name="description"
-    ></textarea>
+    ><%= project.description || "" %></textarea>
 
     <label for="location">
       Location
@@ -56,6 +68,7 @@
       type="text"
       id="location"
       name="location"
+      value="<%= project.location || "" %>"
     >
 
     <label for="project_date">
@@ -66,18 +79,20 @@
       type="date"
       id="project_date"
       name="project_date"
+      value="<%= project.project_date ? String(project.project_date).slice(0, 10) : "" %>"
       required
     >
 
     <button type="submit">
-      Create Service Project
+      Update Service Project
     </button>
 
-    <a href="/projects">
+    <a href="/projects/<%= project.project_id %>">
       Cancel
     </a>
 
   </form>
+
 </main>
 
 <%- include("partials/footer") %>
