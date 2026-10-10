@@ -11,11 +11,17 @@
   alt="<%= organization.name %>"
 >
 
-  <p>
+  
+<% if (user && user.role === "admin") { %>
+<p>
     <a href="/edit-organization/<%= organization.organization_id %>">
       Edit Organization
     </a>
-  </p>
+</p>
+<% } %>
+    
+
+  
 
   <section>
 

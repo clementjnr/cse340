@@ -2,9 +2,15 @@
 
 <main>
 
+  <% if (user && user.role === "admin") { %>
+
   <a href="/new-category">
     Create New Category
   </a>
+
+<% } %>
+
+
 
   <h1>Categories</h1>
 

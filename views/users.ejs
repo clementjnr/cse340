@@ -1,0 +1,62 @@
+<%- include("partials/header", { title }) %>
+
+<main class="container">
+
+    <h1>Registered Users</h1>
+
+    <p>
+        The following users are currently registered
+        on the Community Service Directory.
+    </p>
+
+    <% if (users && users.length > 0) { %>
+
+        <div class="users-table-wrapper">
+
+            <table class="users-table">
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% users.forEach(user => { %>
+
+                        <tr>
+
+                            <td>
+                                <%= user.name %>
+                            </td>
+
+                            <td>
+                                <%= user.email %>
+                            </td>
+
+                            <td>
+                                <%= user.role %>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    <% } else { %>
+
+        <p>No registered users were found.</p>
+
+    <% } %>
+
+</main>
+
+<%- include("partials/footer") %>

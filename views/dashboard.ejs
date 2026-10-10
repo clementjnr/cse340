@@ -1,0 +1,52 @@
+<%- include("partials/header", { title }) %>
+
+<main class="container">
+
+    <h1>Dashboard</h1>
+
+    <h2>
+        Welcome, <%= user.name %>!
+    </h2>
+
+    <p>
+        You are logged in as
+        <strong><%= user.role %></strong>.
+    </p>
+
+    <div class="dashboard-links">
+
+        <% if (user.role === "admin") { %>
+
+            <h2>Administration</h2>
+
+            <p>
+                <a href="/users">
+                    View Registered Users
+                </a>
+            </p>
+
+            <p>
+                <a href="/new-organization">
+                    Create Organization
+                </a>
+            </p>
+
+            <p>
+                <a href="/new-project">
+                    Create Service Project
+                </a>
+            </p>
+
+            <p>
+                <a href="/new-category">
+                    Create Category
+                </a>
+            </p>
+
+        <% } %>
+
+    </div>
+
+</main>
+
+<%- include("partials/footer") %>

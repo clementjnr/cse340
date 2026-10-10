@@ -4,11 +4,16 @@
 
   <h1><%= project.title %></h1>
 
-  <p>
+ 
+    <% if (user && user.role === "admin") { %>
+ <p>
     <a href="/edit-project/<%= project.project_id %>">
       Edit Project
     </a>
-  </p>
+</p>
+<% } %>
+
+  
 
   <section>
 
@@ -42,11 +47,15 @@
 
     <h2>Categories</h2>
 
+<% if (user && user.role === "admin") { %>
+
     <p>
-      <a href="/assign-categories/<%= project.project_id %>">
-        Assign Categories to This Project
-      </a>
+        <a href="/assign-categories/<%= project.project_id %>">
+            Assign Categories
+        </a>
     </p>
+
+<% } %>
 
     <% if (categories && categories.length > 0) { %>
 

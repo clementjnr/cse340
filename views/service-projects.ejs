@@ -3,10 +3,15 @@
 <main>
 
   <h1>Upcoming Service Projects</h1>
+  <% if (user && user.role === "admin") { %>
 
   <a href="/new-project">
     Create New Service Project
   </a>
+
+<% } %>
+
+
 
   <% if (projects && projects.length > 0) { %>
 

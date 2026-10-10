@@ -1,0 +1,57 @@
+<%- include("partials/header", { title }) %>
+
+<main class="container">
+
+    <h1>Create an Account</h1>
+
+    <form action="/register" method="POST">
+
+        <label for="name">
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            maxlength="100"
+        >
+
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            required
+        >
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6"
+        >
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="/login">Log in here</a>.
+    </p>
+
+</main>
+
+<%- include("partials/footer") %>

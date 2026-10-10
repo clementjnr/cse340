@@ -2,9 +2,15 @@
 
 <main>
 
+  <% if (user && user.role === "admin") { %>
+
   <a href="/new-organization">
     Create New Organization
   </a>
+
+<% } %>
+
+
 
   <h1>Organizations</h1>
 
