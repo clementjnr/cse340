@@ -5,7 +5,10 @@ import {
   createProject,
   updateProject,
   getProjectCategoryIds,
-  updateProjectCategories
+  updateProjectCategories,
+  addVolunteer,
+  removeVolunteer,
+  isUserVolunteering
 } from "../models/projects.js";
 
 import {
@@ -55,10 +58,15 @@ const buildProjectDetail = async (
     const categories =
       await getCategoriesByProjectId(projectId);
 
+    const volunteering = req.session.user
+      ? await isUserVolunteering(req.session.user.user_id, projectId)
+      : false;
+
     res.render("project-detail", {
       title: project.title,
       project,
-      categories
+      categories,
+      volunteering
     });
   } catch (error) {
     next(error);
@@ -288,6 +296,35 @@ const saveProjectCategories = async (
   }
 };
 
+const volunteerForProject = async (req, res, next) => {
+  try {
+    const projectId = Number(req.params.id);
+    const project = await getProjectById(projectId);
+
+    if (!project) {
+      req.flash("error", "Project not found.");
+      return res.redirect("/service-projects");
+    }
+
+    await addVolunteer(req.session.user.user_id, projectId);
+    req.flash("success", "You are now volunteering for this project.");
+    res.redirect(`/projects/${projectId}`);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const removeVolunteerFromProject = async (req, res, next) => {
+  try {
+    const projectId = Number(req.params.id);
+    await removeVolunteer(req.session.user.user_id, projectId);
+    req.flash("success", "You have been removed from this project.");
+    res.redirect(req.get("referer") || "/dashboard");
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   buildProjects,
   buildProjectDetail,
@@ -296,5 +333,7 @@ export {
   buildEditProject,
   updateExistingProject,
   buildAssignCategories,
-  saveProjectCategories
+  saveProjectCategories,
+  volunteerForProject,
+  removeVolunteerFromProject
 };

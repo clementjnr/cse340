@@ -482,3 +482,18 @@ form a {
     object-fit: cover;
     border-radius: 8px;
 }
+
+/* W06 volunteering feature */
+.inline-form {
+  display: inline-block;
+  margin: 0.5rem 0 0 0.5rem;
+}
+.volunteer-actions {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #d5dce3;
+  border-radius: 8px;
+}
+.volunteered-project-list li {
+  margin-bottom: 0.75rem;
+}

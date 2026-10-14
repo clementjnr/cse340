@@ -13,6 +13,25 @@
         <strong><%= user.role %></strong>.
     </p>
 
+    <section>
+        <h2>Projects I’m Volunteering For</h2>
+        <% if (volunteeredProjects && volunteeredProjects.length > 0) { %>
+            <ul class="volunteered-project-list">
+                <% volunteeredProjects.forEach(project => { %>
+                    <li>
+                        <a href="/projects/<%= project.project_id %>"><%= project.title %></a>
+                        <span> — <%= project.organization_name %></span>
+                        <form action="/projects/<%= project.project_id %>/unvolunteer" method="POST" class="inline-form">
+                            <button type="submit">Remove Me</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>You have not signed up to volunteer for any projects yet.</p>
+        <% } %>
+    </section>
+
     <div class="dashboard-links">
 
         <% if (user.role === "admin") { %>
